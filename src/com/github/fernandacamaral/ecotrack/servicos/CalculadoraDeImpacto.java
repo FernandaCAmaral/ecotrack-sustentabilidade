@@ -30,6 +30,7 @@ public class CalculadoraDeImpacto {
             i.exibeDetalhes();
         }
 
+        System.out.println("-----------------------------");
         System.out.println(">>> TOTAL DE CRÉDITOS DA EMPRESA: " + calculaTotalDeCreditos());
         System.out.println("=======================================");
     }
@@ -50,7 +51,7 @@ public class CalculadoraDeImpacto {
 
         double valorTotalEmDinheiro = totalCreditosEmpresa * valorDoCreditoNoMercado;
 
-        System.out.println("--- EXTRATO FINANCEIRO AMBIENTAL ---");
+        System.out.println("\n--- EXTRATO FINANCEIRO AMBIENTAL ---");
         System.out.println("-> Total de Créditos acumulados: " + totalCreditosEmpresa);
         System.out.println("-> Cotação atual do Crédito (" + moeda.toUpperCase() + "): " + valorDoCreditoNoMercado);
         System.out.println("-> Valor Total Convertido: " + moeda.toUpperCase() + " " + valorTotalEmDinheiro);
