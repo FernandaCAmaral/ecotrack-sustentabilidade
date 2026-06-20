@@ -1,10 +1,11 @@
 package com.github.fernandacamaral.ecotrack;
 
+import com.github.fernandacamaral.ecotrack.excecoes.CustoInvalidoException;
 import com.github.fernandacamaral.ecotrack.modelos.EnergiaRenovavel;
 import com.github.fernandacamaral.ecotrack.modelos.Reflorestamento;
 import com.github.fernandacamaral.ecotrack.servicos.CalculadoraDeImpacto;
 
-import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -23,54 +24,62 @@ public class Main {
                     4 - Sair""");
             System.out.print("Escolha uma opção: ");
 
-            entrada = scanner.nextInt();
-            scanner.nextLine();
+            try {
 
-            switch (entrada) {
-                case 1:
-                    System.out.print("Digite o nome da Iniciativa: ");
-                    String nomeReflorestar = scanner.nextLine();
+                entrada = scanner.nextInt();
+                scanner.nextLine();
 
-                    System.out.print("Agora o custo da implementação: R$ ");
-                    double custoReflorestar = scanner.nextDouble();
+                switch (entrada) {
+                    case 1:
+                        System.out.print("Digite o nome da Iniciativa: ");
+                        String nomeReflorestar = scanner.nextLine();
 
-                    System.out.print("E quantidades de árvores plantadas: ");
-                    int arvoresPlantadas = scanner.nextInt();
-                    scanner.nextLine();
+                        System.out.print("Agora o custo da implementação: R$ ");
+                        double custoReflorestar = scanner.nextDouble();
 
-                    Reflorestamento novoReflorestamento = new Reflorestamento(nomeReflorestar, custoReflorestar, arvoresPlantadas);
+                        System.out.print("E quantidades de árvores plantadas: ");
+                        int arvoresPlantadas = scanner.nextInt();
+                        scanner.nextLine();
 
-                    calculadora.registra(novoReflorestamento);
-                    System.out.println("✅ Projeto de Reflorestamento registrado com sucesso!");
-                    break;
+                        Reflorestamento novoReflorestamento = new Reflorestamento(nomeReflorestar, custoReflorestar, arvoresPlantadas);
 
-                case 2:
-                    System.out.print("Digite o nome da Iniciativa: ");
-                    String nomeEnergia = scanner.nextLine();
+                        calculadora.registra(novoReflorestamento);
+                        System.out.println("✅ Projeto de Reflorestamento registrado com sucesso!");
+                        break;
 
-                    System.out.print("Agora o custo de implementação: R$ ");
-                    double custoEnergia = scanner.nextDouble();
+                    case 2:
+                        System.out.print("Digite o nome da Iniciativa: ");
+                        String nomeEnergia = scanner.nextLine();
 
-                    System.out.print("E a quantidade de Megawatts gerados: ");
-                    double megawatts = scanner.nextDouble();
-                    scanner.nextLine();
+                        System.out.print("Agora o custo de implementação: R$ ");
+                        double custoEnergia = scanner.nextDouble();
 
-                    EnergiaRenovavel novaEnergia = new EnergiaRenovavel(nomeEnergia, custoEnergia, megawatts);
+                        System.out.print("E a quantidade de Megawatts gerados: ");
+                        double megawatts = scanner.nextDouble();
+                        scanner.nextLine();
 
-                    calculadora.registra(novaEnergia);
-                    System.out.println("✅ Projeto de Energia Renovável registrado com sucesso!");
-                    break;
+                        EnergiaRenovavel novaEnergia = new EnergiaRenovavel(nomeEnergia, custoEnergia, megawatts);
 
-                case 3:
-                    calculadora.geraRelatorioGeral();
-                    break;
+                        calculadora.registra(novaEnergia);
+                        System.out.println("✅ Projeto de Energia Renovável registrado com sucesso!");
+                        break;
 
-                case 4:
-                    System.out.println("Encerrando o EcoTrack... ");
-                    break;
+                    case 3:
+                        calculadora.geraRelatorioGeral();
+                        break;
 
-                default:
-                    System.out.println("❌ Opção inválida! Tente novamente.");
+                    case 4:
+                        System.out.println("Encerrando o EcoTrack... ");
+                        break;
+
+                    default:
+                        System.out.println("❌ Opção inválida! Tente novamente.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("\n❌ERRO: Por favor insira apenas números válidos!");
+                scanner.nextLine();
+            } catch (CustoInvalidoException e) {
+                System.out.println("\nERRO: " + e.getMessage());
             }
         }
         scanner.close();
