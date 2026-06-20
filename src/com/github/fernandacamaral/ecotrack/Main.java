@@ -15,13 +15,14 @@ public class Main {
         CalculadoraDeImpacto calculadora = new CalculadoraDeImpacto();
 
         int entrada = 0;
-        while (entrada != 4) {
+        while (entrada != 5) {
             System.out.println("\n______ ECOTRACK - MENU PRINCIPAL ______");
             System.out.println("""
                     1 - Cadastrar Projeto de Reflorestamento
                     2 - Cadastrar Projeto de Energia Renovável
                     3 - Emitir Relatório de Impacto Ambiental
-                    4 - Sair""");
+                    4 - Consultar Valor Financeiro dos Créditos
+                    5 - Sair""");
             System.out.print("Escolha uma opção: ");
 
             try {
@@ -69,6 +70,12 @@ public class Main {
                         break;
 
                     case 4:
+                        System.out.print("Digite a moeda para conversão (USD ou BRL): ");
+                        String moeda = scanner.nextLine();
+                        calculadora.emitirExtratoFinanceiro(moeda);
+                        break;
+
+                    case 5:
                         System.out.println("Encerrando o EcoTrack... ");
                         break;
 

@@ -34,4 +34,27 @@ public class CalculadoraDeImpacto {
         System.out.println("=======================================");
     }
 
+    public void emitirExtratoFinanceiro(String moeda) {
+
+        String jsonResposta = SimuladorServicoMoeda.buscarCotacaoJson(moeda);
+
+        double valorDoCreditoNoMercado = 0.0;
+
+        if (jsonResposta.contains("USD")) {
+            valorDoCreditoNoMercado = 4.50;
+        } else if (jsonResposta.contains("BRL")) {
+            valorDoCreditoNoMercado = 24.75;
+        }
+
+        double totalCreditosEmpresa = calculaTotalDeCreditos();
+
+        double valorTotalEmDinheiro = totalCreditosEmpresa * valorDoCreditoNoMercado;
+
+        System.out.println("--- EXTRATO FINANCEIRO AMBIENTAL ---");
+        System.out.println("-> Total de Créditos acumulados: " + totalCreditosEmpresa);
+        System.out.println("-> Cotação atual do Crédito (" + moeda.toUpperCase() + "): " + valorDoCreditoNoMercado);
+        System.out.println("-> Valor Total Convertido: " + moeda.toUpperCase() + " " + valorTotalEmDinheiro);
+        System.out.println("==========================================");
+    }
+
 }
